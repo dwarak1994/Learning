@@ -54,3 +54,7 @@
       command: touch '{{ file_name }}'
 
 
+commands
+ansible group1 -i myhosts -m command -a date
+ansible group1 -i "inventory" -m "module" -a "module-argument"
+
