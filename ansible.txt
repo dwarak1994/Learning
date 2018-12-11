@@ -1,0 +1,56 @@
+- hosts: host01
+  become: true
+  tasks:
+    - name: Install required packages
+      apt: name={{item}} state=present update_cache=yes
+      with_items:
+        - nginx
+        - mysql-server
+
+
+
+- hosts: localhost
+  tasks:
+  - name: Ansible create multiple files example
+    file: 
+      path: "{{ item }}"
+      state: touch
+      mode: 0775
+    with_items:
+    - int1.txt
+    - int2.txt
+    - int3.txt
+    - int4.txt
+
+
+
+---
+-
+  name: Create file using inventory defined variable
+  hosts: localhost
+  tasks:
+    -
+      name: Create file using inventory defined variable
+      command: touch '{{ file_name }}'
+
+-
+  name: Create file using inline variable
+  hosts: localhost
+  vars:
+    file_name: 'test2'
+  tasks:
+    -
+      name: Create file using inline variable
+      command: touch '{{ file_name }}'
+
+-
+  name: Create file using variable file
+  hosts: localhost
+  vars_files:
+            - variables.yml
+  tasks:
+    -
+      name: Create file using variable file
+      command: touch '{{ file_name }}'
+
+
