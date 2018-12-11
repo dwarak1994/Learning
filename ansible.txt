@@ -58,3 +58,34 @@ commands
 ansible group1 -i myhosts -m command -a date
 ansible group1 -i "inventory" -m "module" -a "module-argument"
 
+
+
+
+---
+- hosts: host01
+  become: true ##this makes as sudo user
+  tasks:
+    - name: ensure latest sysstat is installed
+      apt:
+        name: sysstat
+        state: latest
+
+ansible-doc apt ##to see the documentation
+
+- hosts: all
+  tasks:
+    - name: "Ping to test connection"
+      ping:
+-
+  name: Install and clone git repository on host01
+  hosts: host01
+  tasks:
+
+    - name: Install Git
+      apt: name=git state=present
+
+    - name: Clone Git Repository
+      git:
+        repo: https://github.com/mmumshad/simple-webapp-color.git
+        dest: demo/ansible/git
+
